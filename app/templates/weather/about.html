@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>🌤️ About Weather App 🌦️</title>
+</head>
+
+<body
+    style="background-color:#0d1b2a; color:white; font-family:Arial, sans-serif; text-align:center; overflow:auto; min-height:100vh;">
+
+
+    <div id="floaters" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+
+
+    <h1 style="font-size:3em; color:#4facfe; text-shadow:0 0 10px #4facfe; transition: transform 0.3s;"
+        onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+        ℹ️ About This Weather App
+    </h1>
+
+    <a href="{% url 'weather' %}"
+        style="color:#4facfe; text-decoration:none; font-size:1.2em; margin-bottom:20px; display:inline-block; transition: transform 0.2s;"
+        onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+        ← Back to Weather Check
+    </a>
+
+    <div style="max-width:600px; margin:0 auto; padding:20px; border-radius:15px; background-color:rgba(255,255,255,0.1); transition: all 0.3s;"
+        onmouseover="this.style.transform='translateY(-5px) scale(1.02)';"
+        onmouseout="this.style.transform='translateY(0) scale(1)';">
+        <h2 style="font-size:2em; color:#4facfe;">🌟 What is this app?</h2>
+        <p style="font-size:1.2em; line-height:1.6;">
+            This is a simple and beautiful weather checking application built with Django. Enter any city name and get
+            instant weather information including temperature, conditions, and more!
+        </p>
+
+        <h2 style="font-size:2em; color:#4facfe;">🔧 How it works</h2>
+        <p style="font-size:1.2em; line-height:1.6;">
+            The app uses the OpenWeatherMap API to fetch real-time weather data. All your weather searches are stored in
+            a database for you to review in the history section.
+        </p>
+
+        <h2 style="font-size:2em; color:#4facfe;">📊 Features</h2>
+        <ul style="text-align:left; font-size:1.2em; line-height:1.8;">
+            <li>🌍 Real-time weather data for any city</li>
+            <li>📚 Weather search history</li>
+            <li>🎨 Beautiful, animated interface</li>
+            <li>📱 Responsive design</li>
+            <li>🔒 Secure data storage</li>
+        </ul>
+
+        <h2 style="font-size:2em; color:#4facfe;">🛠️ Technologies Used</h2>
+        <p style="font-size:1.2em; line-height:1.6;">
+            Built with Python, Django, HTML, CSS, and JavaScript. Powered by OpenWeatherMap API.
+        </p>
+    </div>
+
+    <footer style="margin-top:50px; font-size:0.8em; color:#aaa;">
+        <a href="{% url 'weather' %}" style="color:#4facfe; text-decoration:none;">Weather</a> |
+        <a href="{% url 'weather_history' %}" style="color:#4facfe; text-decoration:none;">History</a> |
+        made by users truly 🥷🏾
+    </footer>
+
+
+    <script>
+        const floaters = document.getElementById('floaters');
+        const emojis = ['☀️', '🌧️', '⛈️', '❄️', '🌤️', '💨', '🌙'];
+        const floaterCount = 20;
+        let floaterElements = [];
+
+
+        for (let i = 0; i < floaterCount; i++) {
+            const span = document.createElement('span');
+            span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.position = 'absolute';
+            span.style.left = Math.random() * window.innerWidth + 'px';
+            span.style.top = Math.random() * window.innerHeight + 'px';
+            span.style.fontSize = (Math.random() * 30 + 15) + 'px';
+            span.style.opacity = Math.random() * 0.7 + 0.3;
+            floaters.appendChild(span);
+            floaterElements.push({
+                el: span,
+                x: parseFloat(span.style.left),
+                y: parseFloat(span.style.top),
+                dx: (Math.random() * 2 - 1) / 2,
+                dy: 0.5 + Math.random() * 1
+            });
+        }
+
+
+        function animate() {
+            floaterElements.forEach(obj => {
+                obj.x += obj.dx;
+                obj.y += obj.dy;
+
+                if (obj.y > window.innerHeight) obj.y = -50;
+                if (obj.x > window.innerWidth) obj.x = 0;
+                if (obj.x < 0) obj.x = window.innerWidth;
+
+                obj.el.style.left = obj.x + 'px';
+                obj.el.style.top = obj.y + 'px';
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+
+</body>
+
+</html>
+</content>

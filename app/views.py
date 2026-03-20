@@ -1,6 +1,7 @@
 
 import requests
 from django.shortcuts import render
+from .models import WeatherRecord
 
 API_KEY = 'e219dfa588188b39a90ed710a0c9477a'
 
@@ -39,9 +40,25 @@ def weather(request):
             }
         
             weather_data['emoji'] = icon_map.get(data['weather'][0]['icon'], "🌤️")
+            
+            # Save to database
+            WeatherRecord.objects.create(
+                city=weather_data['city'],
+                temperature=weather_data['temperature'],
+                description=weather_data['description'],
+                icon=weather_data['icon'],
+                emoji=weather_data['emoji']
+            )
         else:
             
             weather_data = {'error': 'City not found or API error'}
     
 
     return render(request, 'weather/weather.html', {'weather': weather_data, 'city': city})
+
+def weather_history(request):
+    records = WeatherRecord.objects.all().order_by('-timestamp')
+    return render(request, 'weather/history.html', {'records': records})
+
+def about(request):
+    return render(request, 'weather/about.html')

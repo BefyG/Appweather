@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>🌤️ Weather History 🌦️</title>
+</head>
+
+<body
+    style="background-color:#0d1b2a; color:white; font-family:Arial, sans-serif; text-align:center; overflow:auto; min-height:100vh;">
+
+
+    <div id="floaters" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+
+
+    <h1 style="font-size:3em; color:#4facfe; text-shadow:0 0 10px #4facfe; transition: transform 0.3s;"
+        onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+        📚 Weather History
+    </h1>
+
+    <a href="{% url 'weather' %}"
+        style="color:#4facfe; text-decoration:none; font-size:1.2em; margin-bottom:20px; display:inline-block; transition: transform 0.2s;"
+        onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+        ← Back to Weather Check
+    </a>
+
+    {% if records %}
+    <div style="max-width:800px; margin:0 auto; text-align:left;">
+        {% for record in records %}
+        <div style="margin:20px 0; padding:20px; border-radius:15px; background-color:rgba(255,255,255,0.1); transition: all 0.3s;"
+            onmouseover="this.style.transform='translateY(-5px) scale(1.02)';"
+            onmouseout="this.style.transform='translateY(0) scale(1)';">
+            <h3 style="font-size:1.5em; margin:0;">🌍 {{ record.city }} - {{ record.timestamp|date:"M d, Y H:i" }}</h3>
+            <p style="font-size:1.2em;">🌡️ Temperature: {{ record.temperature }}°C</p>
+            <p style="font-size:1em;">💨 {{ record.description | title }}</p>
+            <p style="font-size:1.2em;">{{ record.emoji }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="font-size:1.5em; color:#aaa;">No weather records yet. Start by checking the weather!</p>
+    {% endif %}
+
+    <footer style="margin-top:50px; font-size:0.8em; color:#aaa;">
+        <a href="{% url 'about' %}" style="color:#4facfe; text-decoration:none;">About</a> |
+        made by users truly 🥷🏾
+    </footer>
+
+
+    <script>
+        const floaters = document.getElementById('floaters');
+        const emojis = ['☀️', '🌧️', '⛈️', '❄️', '🌤️', '💨', '🌙'];
+        const floaterCount = 20;
+        let floaterElements = [];
+
+
+        for (let i = 0; i < floaterCount; i++) {
+            const span = document.createElement('span');
+            span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.position = 'absolute';
+            span.style.left = Math.random() * window.innerWidth + 'px';
+            span.style.top = Math.random() * window.innerHeight + 'px';
+            span.style.fontSize = (Math.random() * 30 + 15) + 'px';
+            span.style.opacity = Math.random() * 0.7 + 0.3;
+            floaters.appendChild(span);
+            floaterElements.push({
+                el: span,
+                x: parseFloat(span.style.left),
+                y: parseFloat(span.style.top),
+                dx: (Math.random() * 2 - 1) / 2,
+                dy: 0.5 + Math.random() * 1
+            });
+        }
+
+
+        function animate() {
+            floaterElements.forEach(obj => {
+                obj.x += obj.dx;
+                obj.y += obj.dy;
+
+                if (obj.y > window.innerHeight) obj.y = -50;
+                if (obj.x > window.innerWidth) obj.x = 0;
+                if (obj.x < 0) obj.x = window.innerWidth;
+
+                obj.el.style.left = obj.x + 'px';
+                obj.el.style.top = obj.y + 'px';
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+
+</body>
+
+</html>
+</content>
