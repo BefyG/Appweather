@@ -1,47 +1,39 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>🌤️ About Weather App 🌦️</title>
+    <link rel="stylesheet" href="{% static 'weather/style.css' %}">
 </head>
 
-<body
-    style="background-color:#0d1b2a; color:white; font-family:Arial, sans-serif; text-align:center; overflow:auto; min-height:100vh;">
+<body class="app-body">
 
 
-    <div id="floaters" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+    <div id="floaters" class="floaters"></div>
 
 
-    <h1 style="font-size:3em; color:#4facfe; text-shadow:0 0 10px #4facfe; transition: transform 0.3s;"
-        onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
-        ℹ️ About This Weather App
-    </h1>
+    <h1 class="title">ℹ️ About This Weather App</h1>
 
-    <a href="{% url 'weather' %}"
-        style="color:#4facfe; text-decoration:none; font-size:1.2em; margin-bottom:20px; display:inline-block; transition: transform 0.2s;"
-        onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
-        ← Back to Weather Check
-    </a>
+    <a href="{% url 'weather' %}" class="nav-link nav-back">← Back to Weather Check</a>
 
-    <div style="max-width:600px; margin:0 auto; padding:20px; border-radius:15px; background-color:rgba(255,255,255,0.1); transition: all 0.3s;"
-        onmouseover="this.style.transform='translateY(-5px) scale(1.02)';"
-        onmouseout="this.style.transform='translateY(0) scale(1)';">
-        <h2 style="font-size:2em; color:#4facfe;">🌟 What is this app?</h2>
-        <p style="font-size:1.2em; line-height:1.6;">
+    <div class="card info-card">
+        <h2 class="accent">🌟 What is this app?</h2>
+        <p>
             This is a simple and beautiful weather checking application built with Django. Enter any city name and get
             instant weather information including temperature, conditions, and more!
         </p>
 
-        <h2 style="font-size:2em; color:#4facfe;">🔧 How it works</h2>
-        <p style="font-size:1.2em; line-height:1.6;">
+        <h2 class="accent">🔧 How it works</h2>
+        <p>
             The app uses the OpenWeatherMap API to fetch real-time weather data. All your weather searches are stored in
             a database for you to review in the history section.
         </p>
 
-        <h2 style="font-size:2em; color:#4facfe;">📊 Features</h2>
-        <ul style="text-align:left; font-size:1.2em; line-height:1.8;">
+        <h2 class="accent">📊 Features</h2>
+        <ul class="features-list">
             <li>🌍 Real-time weather data for any city</li>
             <li>📚 Weather search history</li>
             <li>🎨 Beautiful, animated interface</li>
@@ -49,15 +41,15 @@
             <li>🔒 Secure data storage</li>
         </ul>
 
-        <h2 style="font-size:2em; color:#4facfe;">🛠️ Technologies Used</h2>
-        <p style="font-size:1.2em; line-height:1.6;">
+        <h2 class="accent">🛠️ Technologies Used</h2>
+        <p>
             Built with Python, Django, HTML, CSS, and JavaScript. Powered by OpenWeatherMap API.
         </p>
     </div>
 
-    <footer style="margin-top:50px; font-size:0.8em; color:#aaa;">
-        <a href="{% url 'weather' %}" style="color:#4facfe; text-decoration:none;">Weather</a> |
-        <a href="{% url 'weather_history' %}" style="color:#4facfe; text-decoration:none;">History</a> |
+    <footer class="footer">
+        <a href="{% url 'weather' %}" class="nav-link">Weather</a> |
+        <a href="{% url 'weather_history' %}" class="nav-link">History</a> |
         made by users truly 🥷🏾
     </footer>
 

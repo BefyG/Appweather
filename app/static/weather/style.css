@@ -1,0 +1,232 @@
+/* Shared dark theme for the weather app templates */
+:root {
+    --accent: #4facfe;
+    --accent-2: #00f2fe;
+    --bg: #0d1b2a;
+    --muted: #aaa;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.app-body {
+    background-color: var(--bg);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: auto;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.floaters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0
+}
+
+.floaters span {
+    position: absolute;
+    will-change: transform, left, top;
+}
+
+.title {
+    font-size: 3em;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+    transition: transform 0.3s;
+    z-index: 1
+}
+
+.title:hover {
+    transform: scale(1.05)
+}
+
+.search-form {
+    margin: 30px 0;
+    z-index: 1
+}
+
+.city-input {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.city-input:focus,
+.city-input:hover {
+    transform: scale(1.03);
+    outline: none
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--accent);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-2)
+}
+
+.card {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.06);
+    transition: all 0.3s;
+    z-index: 1
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03)
+}
+
+.card h2 {
+    font-size: 2em;
+    margin: 0
+}
+
+.card p {
+    font-size: 1.2em;
+    margin: 6px 0
+}
+
+.weather-icon {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    transition: transform .5s
+}
+
+.weather-icon:hover {
+    transform: rotate(15deg) scale(1.08)
+}
+
+.error {
+    color: #ff4c4c;
+    font-weight: bold;
+    font-size: 1.1em
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: bold
+}
+
+.btn-link:hover {
+    background-color: var(--accent-2)
+}
+
+.footer {
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: var(--muted);
+    z-index: 1
+}
+
+.nav-link {
+    color: var(--accent);
+    text-decoration: none
+}
+
+.nav-link:hover {
+    text-decoration: underline
+}
+
+.nav-back {
+    display: inline-block;
+    margin-bottom: 20px
+}
+
+.records-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    z-index: 1
+}
+
+.record-item {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    transition: all .3s
+}
+
+.record-item:hover {
+    transform: translateY(-5px)
+}
+
+.record-item h3 {
+    font-size: 1.1rem;
+    margin: 0
+}
+
+.record-item p {
+    font-size: 1rem;
+    margin: 6px 0
+}
+
+.emoji {
+    font-size: 1.2rem
+}
+
+.no-records {
+    font-size: 1.2rem;
+    color: var(--muted)
+}
+
+.info-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px
+}
+
+.accent {
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin-top: 10px
+}
+
+.features-list {
+    list-style: disc;
+    text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Small screens */
+@media (max-width:600px) {
+    .title {
+        font-size: 2rem
+    }
+
+    .card {
+        width: 90%
+    }
+
+    .city-input {
+        width: 60%
+    }
+}

@@ -1,67 +1,48 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>🌤️ Weather App 🌦️</title>
+    <link rel="stylesheet" href="{% static 'weather/style.css' %}">
 </head>
 
-<body
-    style="background-color:#0d1b2a; color:white; font-family:Arial, sans-serif; text-align:center; overflow:auto; min-height:100vh;">
+<body class="app-body">
 
 
-    <div id="floaters" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+    <div id="floaters" class="floaters"></div>
 
 
-    <h1 style="font-size:3em; color:#4facfe; text-shadow:0 0 10px #4facfe; transition: transform 0.3s;"
-        onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
-        🌆 Check the Weather
-    </h1>
+    <h1 class="title">🌆 Check the Weather</h1>
 
 
-    <form method="post" style="margin:30px 0;">
+    <form method="post" class="search-form">
         {% csrf_token %}
-        <input type="text" name="city" placeholder="Enter city 🏙️"
-            style="padding:10px; font-size:1em; border-radius:5px; border:none; transition: transform 0.2s;"
-            onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
-        <button type="submit"
-            style="padding:10px 20px; border-radius:5px; border:none; background-color:#4facfe; color:white; font-weight:bold; cursor:pointer; transition: transform 0.2s;"
-            onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#00f2fe';"
-            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#4facfe';">
-            🌤️ Get Weather
-        </button>
+        <input type="text" name="city" placeholder="Enter city 🏙️" class="city-input">
+        <button type="submit" class="btn">🌤️ Get Weather</button>
     </form>
 
 
     {% if weather %}
-    <div style="margin-top:30px; padding:20px; border-radius:15px; display:inline-block; background-color:rgba(255,255,255,0.1); transition: all 0.3s;"
-        onmouseover="this.style.transform='translateY(-5px) scale(1.03)';"
-        onmouseout="this.style.transform='translateY(0) scale(1)';">
+    <div class="card">
         {% if weather.error %}
-        <p style="color:#ff4c4c; font-weight:bold; font-size:1.2em;">⚠️ {{ weather.error }}</p>
+        <p class="error">⚠️ {{ weather.error }}</p>
         {% else %}
-        <h2 style="font-size:2em;">🌍 {{ weather.city }}</h2>
-        <p style="font-size:1.5em;">🌡️ Temperature: {{ weather.temperature }}°C</p>
-        <p style="font-size:1.2em;">💨 {{ weather.description | title }}</p>
-        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon"
-            style="width:100px; height:100px; margin-top:10px; transition: transform 0.5s;"
-            onmouseover="this.style.transform='rotate(15deg) scale(1.1)';"
-            onmouseout="this.style.transform='rotate(0deg) scale(1)';">
+        <h2>🌍 {{ weather.city }}</h2>
+        <p>🌡️ Temperature: {{ weather.temperature }}°C</p>
+        <p>💨 {{ weather.description | title }}</p>
+        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon" class="weather-icon">
         {% endif %}
         <br><br>
-        <a href="{% url 'weather' %}"
-            style="padding:8px 16px; border-radius:5px; border:none; background-color:#4facfe; color:white; font-weight:bold; text-decoration:none; transition: transform 0.2s;"
-            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#00f2fe';"
-            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#4facfe';">
-            🔄 Search Another City
-        </a>
+        <a href="{% url 'weather' %}" class="btn-link">🔄 Search Another City</a>
     </div>
     {% endif %}
 
-    <footer style="margin-top:50px; font-size:0.8em; color:#aaa;">
-        <a href="{% url 'weather_history' %}" style="color:#4facfe; text-decoration:none;">View Weather History</a> |
-        <a href="{% url 'about' %}" style="color:#4facfe; text-decoration:none;">About</a> |
+    <footer class="footer">
+        <a href="{% url 'weather_history' %}" class="nav-link">View Weather History</a> |
+        <a href="{% url 'about' %}" class="nav-link">About</a> |
         made by users truly 🥷🏾
     </footer>
 
@@ -111,5 +92,5 @@
     </script>
 
 </body>
- 
+
 </html>
